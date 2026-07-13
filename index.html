@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- EDITAR: nombre real del negocio en title y description -->
+<title>Granja Alborada — Cerdo, Embutidos Artesanales y Línea Vegana</title>
+<meta name="description" content="Granja con elaboración propia: cortes de cerdo, embutidos artesanales de campo y una línea vegana hecha con el mismo oficio. Venta directa, del corral y de la huerta a tu mesa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Editorial de campo: carbón cálido + crema manteca + bordó + verde huerta */
+  --carbon:#1a1512;
+  --carbon-2:#241d18;
+  --crema:#f2e9d8;
+  --crema-2:#e9dcc4;
+  --bordo:#8c2f2b;
+  --bordo-claro:#b04a3d;
+  --verde:#4e6b38;
+  --verde-claro:#7e9b5a;
+  --humo:#a89d8c;
+  --linea-osc:rgba(242,233,216,.16);
+  --linea-cla:rgba(26,21,18,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Work Sans',sans-serif;background:var(--carbon);color:var(--crema);line-height:1.7;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400;line-height:1.08}
+h1 em,h2 em{font-style:italic}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* ===== Header (transparente sobre el hero, sólido al scrollear) ===== */
+header{position:fixed;top:0;left:0;right:0;z-index:300;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+header.solida{background:rgba(26,21,18,.94);backdrop-filter:blur(10px);border-color:var(--linea-osc)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:34px;height:82px}
+.logo{text-decoration:none;line-height:1;flex:0 0 auto}
+.logo small{display:block;font-family:'JetBrains Mono',monospace;font-size:.56rem;letter-spacing:.44em;text-transform:uppercase;color:var(--humo);margin-bottom:3px}
+.logo b{font-family:'DM Serif Display',serif;font-weight:400;font-size:1.6rem;color:var(--crema);letter-spacing:.02em}
+.logo b i{font-style:italic;color:var(--bordo-claro)}
+.nav ul{display:flex;gap:clamp(16px,2vw,28px);list-style:none;flex:1;justify-content:center;flex-wrap:nowrap}
+.nav ul a{text-decoration:none;font-size:.85rem;font-weight:500;letter-spacing:.03em;color:var(--crema);opacity:.85;white-space:nowrap}
+.nav ul a:hover{opacity:1;color:var(--bordo-claro)}
+.nav ul .solo-movil{display:none}
+.nav-cta{flex:0 0 auto;border:1px solid var(--crema);color:var(--crema);text-decoration:none;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:12px 20px;white-space:nowrap;transition:all .25s}
+.nav-cta:hover{background:var(--crema);color:var(--carbon)}
+.burger{display:none;background:none;border:none;font-size:1.7rem;cursor:pointer;color:var(--crema)}
+
+/* colapso temprano del menú: con 6 links no se aprieta nunca */
+@media (max-width:1120px){
+  .nav ul{display:none;position:absolute;top:82px;left:0;right:0;background:var(--carbon);flex-direction:column;gap:0;padding:14px 28px 22px;border-bottom:1px solid var(--linea-osc)}
+  .nav ul.abierto{display:flex}
+  .nav ul li{padding:12px 0;border-bottom:1px solid var(--linea-osc)}
+  .nav ul li:last-child{border-bottom:none}
+  .nav ul a{font-size:1rem}
+  .burger{display:block}
+  header{background:rgba(26,21,18,.94);backdrop-filter:blur(10px);border-color:var(--linea-osc)}
+}
+
+/* ===== Hero full-bleed ===== */
+.hero{min-height:96vh;position:relative;display:flex;align-items:flex-end;
+  background:linear-gradient(180deg,rgba(26,21,18,.55) 0%,rgba(26,21,18,.25) 45%,rgba(26,21,18,.92) 100%),
+  url('https://images.pexels.com/photos/4639328/pexels-photo-4639328.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat}
+.hero-int{padding:0 0 90px;max-width:820px}
+.hero .sello-linea{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.hero .sello-linea span{font-size:.76rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--crema-2)}
+.hero .sello-linea::before,.hero .sello-linea::after{content:'';height:1px;width:48px;background:var(--bordo-claro)}
+.hero h1{font-size:clamp(2.9rem,6.4vw,5.2rem);margin-bottom:24px;text-shadow:0 2px 30px rgba(0,0,0,.4)}
+.hero h1 em{color:var(--crema-2)}
+.hero p{font-size:1.15rem;font-weight:300;color:var(--crema-2);max-width:36rem;margin-bottom:38px}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;padding:17px 34px;transition:all .25s}
+.btn-bordo{background:var(--bordo);color:var(--crema)}
+.btn-bordo:hover{background:var(--bordo-claro)}
+.btn-linea{border:1px solid var(--crema);color:var(--crema)}
+.btn-linea:hover{background:var(--crema);color:var(--carbon)}
+.hero-scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:.66rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--humo);animation:flota 2.4s ease-in-out infinite}
+@keyframes flota{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+
+/* ===== Tira de datos ===== */
+.tira{border-top:1px solid var(--linea-osc);border-bottom:1px solid var(--linea-osc);background:var(--carbon-2)}
+.tira-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.td{padding:34px 30px;border-left:1px solid var(--linea-osc)}
+.td:first-child{border-left:none}
+.td b{font-family:'DM Serif Display',serif;font-weight:400;font-size:1.22rem;display:block;margin-bottom:5px;color:var(--crema)}
+.td b i{font-style:italic;color:var(--bordo-claro)}
+.td span{font-size:.84rem;color:var(--humo);font-weight:300}
+
+/* ===== Secciones ===== */
+section{padding:100px 0}
+.enc{margin-bottom:60px;max-width:680px}
+.enc .k{display:flex;align-items:center;gap:14px;font-size:.76rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px}
+.enc .k::before{content:'';width:36px;height:1px;background:currentColor;opacity:.7}
+.enc h2{font-size:clamp(2.1rem,4.2vw,3.2rem)}
+.enc p{margin-top:14px;color:var(--humo);font-weight:300;font-size:1.04rem}
+.k-bordo{color:var(--bordo-claro)}
+.k-verde{color:var(--verde-claro)}
+
+/* ===== DOS MUNDOS (firma) ===== */
+.mundos{display:flex;min-height:560px;gap:0}
+.mundo{flex:1;position:relative;overflow:hidden;display:flex;align-items:flex-end;text-decoration:none;transition:flex .5s cubic-bezier(.5,0,.2,1);cursor:pointer}
+.mundos:hover .mundo:hover{flex:1.7}
+.mundo .fondo{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s ease}
+.mundo:hover .fondo{transform:scale(1.05)}
+.mundo.tradicion .fondo{background-image:linear-gradient(180deg,rgba(70,20,16,.25),rgba(46,12,10,.88)),url('https://images.pexels.com/photos/8775044/pexels-photo-8775044.jpeg?auto=compress&cs=tinysrgb&w=1200')}
+.mundo.huerta .fondo{background-image:linear-gradient(180deg,rgba(30,46,18,.25),rgba(20,32,12,.88)),url('https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=1200')}
+.mundo-int{position:relative;padding:46px 44px;width:100%}
+.mundo .num{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.1rem;color:var(--crema-2);opacity:.8}
+.mundo h3{font-size:clamp(1.9rem,3.4vw,2.9rem);margin:8px 0 12px}
+.mundo p{font-weight:300;color:var(--crema-2);font-size:.98rem;max-width:26rem;margin-bottom:20px}
+.mundo .ir{font-size:.74rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.mundo.tradicion .ir{color:#e8a08f}
+.mundo.huerta .ir{color:#b5cf8f}
+
+/* ===== Cartas estilo mostrador ===== */
+.carta{background:var(--crema);color:var(--carbon)}
+.carta .enc p{color:#6d6250}
+.carta-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
+.carta-foto{position:sticky;top:110px}
+.carta-foto img{width:100%;aspect-ratio:4/4.8;object-fit:cover}
+.carta-foto figcaption{font-family:'DM Serif Display',serif;font-style:italic;font-size:.98rem;color:#6d6250;margin-top:12px}
+.item{display:flex;align-items:baseline;gap:12px;padding:20px 0;border-bottom:1px solid var(--linea-cla)}
+.item:first-of-type{border-top:1px solid var(--linea-cla)}
+.item-info b{font-family:'DM Serif Display',serif;font-weight:400;font-size:1.25rem;display:block}
+.item-info span{font-size:.86rem;color:#6d6250;font-weight:300}
+.item .puntos{flex:1;border-bottom:2px dotted rgba(26,21,18,.3);transform:translateY(-6px)}
+.item .precio{font-family:'JetBrains Mono',monospace;font-size:.85rem;font-weight:600;white-space:nowrap}
+.carta .aviso{margin-top:26px;font-size:.85rem;color:#6d6250;font-weight:300}
+.carta .aviso b{font-weight:600}
+.tag-etiqueta{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;margin-left:8px;vertical-align:middle}
+.et-bordo{background:rgba(140,47,43,.14);color:var(--bordo)}
+.et-verde{background:rgba(78,107,56,.16);color:var(--verde)}
+.carta.verde{background:var(--crema-2)}
+
+/* ===== Banda quote ===== */
+.banda{min-height:420px;display:flex;align-items:center;justify-content:center;text-align:center;
+  background:linear-gradient(rgba(26,21,18,.72),rgba(26,21,18,.72)),url('https://images.pexels.com/photos/4324322/pexels-photo-4324322.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover fixed no-repeat;padding:90px 24px}
+.banda blockquote{font-family:'DM Serif Display',serif;font-size:clamp(1.9rem,4vw,3.1rem);font-style:italic;max-width:50rem;line-height:1.25}
+.banda .firma{display:block;font-size:.72rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--humo);margin-top:24px}
+
+/* ===== La Alacena ===== */
+.alacena{background:var(--carbon-2);border-top:1px solid var(--linea-osc)}
+.ala-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--linea-osc);border-left:1px solid var(--linea-osc)}
+.ala{border-right:1px solid var(--linea-osc);border-bottom:1px solid var(--linea-osc);display:flex;flex-direction:column;transition:background .25s}
+.ala:hover{background:var(--carbon)}
+.ala figure{aspect-ratio:16/10;overflow:hidden}
+.ala figure img{width:100%;height:100%;object-fit:cover;filter:saturate(.9);transition:transform .5s ease}
+.ala:hover figure img{transform:scale(1.06)}
+.ala-body{padding:24px 28px 30px;display:flex;flex-direction:column;flex:1}
+.ala h3{font-size:1.35rem;margin-bottom:8px}
+.ala p{font-size:.88rem;font-weight:300;color:var(--humo);flex:1}
+.ala .precio{font-family:'JetBrains Mono',monospace;font-size:.82rem;font-weight:600;color:var(--crema);margin-top:18px}
+.ala .precio i{font-style:normal;color:var(--bordo-claro)}
+
+/* ===== Proceso ===== */
+.proceso-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--linea-osc);border-left:1px solid var(--linea-osc)}
+.pro{border-right:1px solid var(--linea-osc);border-bottom:1px solid var(--linea-osc);padding:38px 30px;transition:background .25s}
+.pro:hover{background:var(--carbon-2)}
+.pro .n{font-family:'DM Serif Display',serif;font-style:italic;font-size:2.6rem;color:var(--bordo-claro);line-height:1;display:block;margin-bottom:18px}
+.pro h3{font-size:1.3rem;margin-bottom:10px}
+.pro p{font-size:.9rem;font-weight:300;color:var(--humo)}
+
+/* ===== Voces ===== */
+.voces{background:var(--carbon-2);border-top:1px solid var(--linea-osc);border-bottom:1px solid var(--linea-osc)}
+.voces-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+.voz{border-left:2px solid var(--bordo);padding-left:22px}
+.voz p{font-family:'DM Serif Display',serif;font-style:italic;font-size:1.12rem;line-height:1.45;margin-bottom:14px}
+.voz b{font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.voz span{display:block;font-size:.74rem;color:var(--humo)}
+.voz:nth-child(2){border-color:var(--verde-claro)}
+
+/* ===== FAQ ===== */
+.faq-item{border-bottom:1px solid var(--linea-osc)}
+.faq-item:first-of-type{border-top:1px solid var(--linea-osc)}
+.faq-item button{width:100%;text-align:left;background:none;border:none;font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--crema);padding:26px 60px 26px 4px;cursor:pointer;position:relative}
+.faq-item button::after{content:'+';position:absolute;right:10px;top:50%;transform:translateY(-50%);font-family:'Work Sans',sans-serif;font-size:1.5rem;font-weight:300;color:var(--bordo-claro);transition:transform .25s}
+.faq-item.abierta button::after{transform:translateY(-50%) rotate(45deg)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-body p{padding:0 4px 26px;font-size:.94rem;font-weight:300;color:var(--humo);max-width:44rem}
+.faq-item.abierta .faq-body{max-height:260px}
+
+/* ===== Visita ===== */
+.visita-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px}
+.v-fila{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--linea-osc)}
+.v-fila:first-of-type{border-top:1px solid var(--linea-osc)}
+.v-fila b{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--humo);flex:0 0 130px;padding-top:4px}
+.v-fila div{font-weight:300}
+.mapa{border:1px solid var(--linea-osc);min-height:320px;display:flex;align-items:center;justify-content:center;color:var(--humo);font-size:.9rem;text-align:center;padding:20px;font-weight:300}
+
+/* ===== CTA final ===== */
+.cta-final{text-align:center;padding:110px 0}
+.cta-final h2{font-size:clamp(2.2rem,4.6vw,3.4rem);margin-bottom:18px}
+.cta-final h2 em{color:var(--bordo-claro)}
+.cta-final p{color:var(--humo);font-weight:300;max-width:34rem;margin:0 auto 40px}
+
+/* ===== Footer ===== */
+footer{border-top:1px solid var(--linea-osc);padding:34px 0;font-size:.82rem;color:var(--humo);font-weight:300}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer a{color:var(--bordo-claro);text-decoration:none}
+
+/* ===== Chat ===== */
+#chat-boton{position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:var(--bordo);color:var(--crema);border:1px solid rgba(242,233,216,.25);font-size:1.4rem;cursor:pointer;box-shadow:0 14px 36px rgba(0,0,0,.5);z-index:900;transition:transform .15s,background .2s}
+#chat-boton:hover{transform:scale(1.07);background:var(--bordo-claro)}
+#chat-panel{position:fixed;bottom:98px;right:24px;width:min(375px,calc(100vw - 32px));height:530px;max-height:calc(100vh - 130px);background:var(--crema);color:var(--carbon);box-shadow:0 26px 70px rgba(0,0,0,.55);display:none;flex-direction:column;overflow:hidden;z-index:901}
+#chat-panel.abierto{display:flex}
+.chat-top{background:var(--carbon);color:var(--crema);padding:17px 19px;border-bottom:2px solid var(--bordo)}
+.chat-top b{font-family:'DM Serif Display',serif;font-weight:400;font-size:1.1rem}
+.chat-top span{display:block;font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--bordo-claro)}
+#chat-mensajes{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--crema)}
+.msg{max-width:85%;padding:11px 15px;font-size:.89rem;line-height:1.5;white-space:pre-wrap;word-wrap:break-word}
+.msg.bot{background:#fff;border:1px solid var(--linea-cla);align-self:flex-start}
+.msg.usuario{background:var(--bordo);color:var(--crema);align-self:flex-end}
+.msg.escribiendo{color:#6d6250;font-style:italic;background:#fff;border:1px solid var(--linea-cla);align-self:flex-start}
+.chat-form{display:flex;gap:8px;padding:12px;border-top:1px solid var(--linea-cla);background:var(--crema)}
+.chat-form input{flex:1;border:1px solid rgba(26,21,18,.3);background:#fff;padding:12px 14px;font-size:.9rem;font-family:'Work Sans',sans-serif;outline:none;color:var(--carbon)}
+.chat-form input:focus{border-color:var(--bordo)}
+.chat-form button{background:var(--carbon);color:var(--crema);border:none;padding:0 18px;font-size:1rem;cursor:pointer}
+.chat-form button:hover{background:var(--bordo)}
+
+/* ===== Responsive ===== */
+@media (max-width:940px){
+  .mundos{flex-direction:column;min-height:auto}
+  .mundo{min-height:340px}
+  .mundos:hover .mundo:hover{flex:1}
+  .carta-grid,.visita-grid{grid-template-columns:1fr;gap:40px}
+  .carta-foto{position:static}
+  .carta-foto img{aspect-ratio:16/10}
+  .proceso-grid,.ala-grid,.tira-grid{grid-template-columns:1fr 1fr}
+  .td{padding:24px 22px}
+  .voces-grid{grid-template-columns:1fr;gap:30px}
+  .banda{background-attachment:scroll}
+}
+@media (max-width:640px){
+  .nav-cta{display:none}
+  .nav ul .solo-movil{display:block}
+  .nav ul .solo-movil a{color:var(--bordo-claro);font-weight:600}
+  .proceso-grid,.ala-grid,.tira-grid{grid-template-columns:1fr}
+  section{padding:70px 0}
+  .hero-int{padding-bottom:70px}
+}
+</style>
+</head>
+<body>
+
+<header id="header">
+  <div class="wrap nav">
+    <!-- EDITAR: nombre del negocio -->
+    <a class="logo" href="#"><small>Granja · Elaboración propia</small><b>Alborada<i>.</i></b></a>
+    <button class="burger" id="burger" aria-label="Menú">☰</button>
+    <ul id="menu">
+      <li><a href="#mundos">Las dos cartas</a></li>
+      <li><a href="#tradicion">Cerdo y embutidos</a></li>
+      <li><a href="#huerta">Línea vegana</a></li>
+      <li><a href="#alacena">El almacén</a></li>
+      <li><a href="#proceso">Cómo trabajamos</a></li>
+      <li><a href="#visitanos">Visitanos</a></li>
+      <li class="solo-movil"><a href="https://wa.me/5491100000000?text=Hola,%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Hacer pedido →</a></li>
+    </ul>
+    <!-- EDITAR: número de WhatsApp real (formato 549 + área + número, sin espacios) -->
+    <a class="nav-cta" href="https://wa.me/5491100000000?text=Hola,%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Hacer pedido</a>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" style="padding:0">
+  <div class="wrap hero-int">
+    <div class="sello-linea"><span>Del corral y de la huerta</span></div>
+    <!-- EDITAR: titular -->
+    <h1>Lo que sale de esta granja, <em>se nota en la mesa</em>.</h1>
+    <p>Criamos, elaboramos y vendemos sin intermediarios: cortes de cerdo, embutidos artesanales de campo y una línea vegana hecha con el mismo oficio de siempre.</p>
+    <div class="hero-btns">
+      <a class="btn btn-bordo" href="#tradicion">Ver carta de cerdo</a>
+      <a class="btn btn-linea" href="#huerta">Ver línea vegana</a>
+    </div>
+  </div>
+  <span class="hero-scroll">↓ recorré la granja</span>
+</section>
+
+<!-- tira de datos — EDITAR: datos reales -->
+<div class="tira">
+  <div class="wrap tira-grid">
+    <div class="td"><b>Venta <i>directa</i></b><span>De la granja a tu mesa, sin intermediarios</span></div>
+    <div class="td"><b>Jueves a <i>domingo</i></b><span>Mostrador abierto de 9 a 19 hs</span></div>
+    <div class="td"><b>Envíos <i>con frío</i></b><span>Cadena de frío garantizada en toda la zona</span></div>
+    <div class="td"><b>Mayor y <i>menor</i></b><span>Precio especial por bulto para comercios</span></div>
+  </div>
+</div>
+
+<!-- ================= DOS MUNDOS (firma) ================= -->
+<section id="mundos" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="enc">
+      <span class="k k-bordo">Una granja, dos cartas</span>
+      <h2>Elegí tu <em>mundo</em></h2>
+      <p>Acá conviven la tradición del chacinado de campo y una línea vegana elaborada con el mismo cuidado. Nadie se va con las manos vacías.</p>
+    </div>
+  </div>
+  <div class="mundos">
+    <a class="mundo tradicion" href="#tradicion">
+      <div class="fondo"></div>
+      <div class="mundo-int">
+        <span class="num">Carta n° 1</span>
+        <h3>La Tradición</h3>
+        <p>Cortes frescos de cerdo y embutidos artesanales madurados como antes: bondiola, salame de campo, chorizos caseros.</p>
+        <span class="ir">Ver la carta →</span>
+      </div>
+    </a>
+    <a class="mundo huerta" href="#huerta">
+      <div class="fondo"></div>
+      <div class="mundo-int">
+        <span class="num">Carta n° 2</span>
+        <h3>La Huerta</h3>
+        <p>Milanesas de legumbres, escabeches, hummus y embutidos veganos de elaboración propia. Sabor de granja, sin origen animal.</p>
+        <span class="ir">Ver la carta →</span>
+      </div>
+    </a>
+  </div>
+</section>
+<!-- ================= CARTA TRADICIÓN ================= -->
+<section class="carta" id="tradicion">
+  <div class="wrap">
+    <div class="enc">
+      <span class="k" style="color:var(--bordo)">Carta n° 1 · La Tradición</span>
+      <h2>Cerdo y embutidos <em>de elaboración propia</em></h2>
+      <p>Todo lo que ves acá se cría y se elabora en la granja. Maduración natural, recetas de familia y nada que no pondríamos en nuestra propia mesa.</p>
+    </div>
+    <div class="carta-grid">
+      <figure class="carta-foto">
+        <img src="https://images.pexels.com/photos/9424951/pexels-photo-9424951.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Preparación artesanal de cortes de cerdo">
+        <figcaption>Mostrador · cortes del día</figcaption>
+      </figure>
+      <div>
+        <!-- EDITAR: productos y precios reales -->
+        <div class="item"><div class="item-info"><b>Bondiola curada</b><span>Madurada a la antigua, corte entero o feteada</span></div><div class="puntos"></div><span class="precio">$[EDITAR]/kg</span></div>
+        <div class="item"><div class="item-info"><b>Salame de campo</b><span>Picado grueso, receta de la casa <span class="tag-etiqueta et-bordo">El clásico</span></span></div><div class="puntos"></div><span class="precio">$[EDITAR]/kg</span></div>
+        <div class="item"><div class="item-info"><b>Chorizo casero</b><span>Puro cerdo, atado a mano, para la parrilla</span></div><div class="puntos"></div><span class="precio">$[EDITAR]/kg</span></div>
+        <div class="item"><div class="item-info"><b>Pechito de cerdo</b><span>Con manta, ideal asador o al horno</span></div><div class="puntos"></div><span class="precio">$[EDITAR]/kg</span></div>
+        <div class="item"><div class="item-info"><b>Matambrito de cerdo</b><span>Tierno, para la parrilla o a la pizza</span></div><div class="puntos"></div><span class="precio">$[EDITAR]/kg</span></div>
+        <div class="item"><div class="item-info"><b>Costillar / carré</b><span>Cortes frescos del día, por encargo el corte que quieras</span></div><div class="puntos"></div><span class="precio">$[EDITAR]/kg</span></div>
+        <p class="aviso"><b>Precios de mostrador orientativos.</b> Cambian con la lista semanal: pedí la lista vigente por WhatsApp. Por bulto o media res, precio especial.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CARTA HUERTA ================= -->
+<section class="carta verde" id="huerta">
+  <div class="wrap">
+    <div class="enc">
+      <span class="k" style="color:var(--verde)">Carta n° 2 · La Huerta</span>
+      <h2>Línea vegana <em>con oficio de granja</em></h2>
+      <p>No es un agregado de compromiso: es una línea completa elaborada acá, con verduras y legumbres de estación. El mismo cuidado, otro origen.</p>
+    </div>
+    <div class="carta-grid">
+      <figure class="carta-foto">
+        <img src="https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Preparaciones veganas con vegetales frescos">
+        <figcaption>Elaboración del día · línea verde</figcaption>
+      </figure>
+      <div>
+        <!-- EDITAR: productos y precios reales -->
+        <div class="item"><div class="item-info"><b>Milanesas de legumbres</b><span>Lenteja y garbanzo, listas para el horno <span class="tag-etiqueta et-verde">La más pedida</span></span></div><div class="puntos"></div><span class="precio">$[EDITAR]/doc</span></div>
+        <div class="item"><div class="item-info"><b>Hamburguesas de la huerta</b><span>Remolacha, quinoa y arroz yamaní</span></div><div class="puntos"></div><span class="precio">$[EDITAR]/u</span></div>
+        <div class="item"><div class="item-info"><b>Chorizo vegano de seitán</b><span>Ahumado, para la parrilla, rinde como el original</span></div><div class="puntos"></div><span class="precio">$[EDITAR]/kg</span></div>
+        <div class="item"><div class="item-info"><b>Escabeche de verduras</b><span>De estación, en frasco, receta de la abuela</span></div><div class="puntos"></div><span class="precio">$[EDITAR]/frasco</span></div>
+        <div class="item"><div class="item-info"><b>Hummus y untables</b><span>Garbanzo, berenjena ahumada, morrón asado</span></div><div class="puntos"></div><span class="precio">$[EDITAR]/pote</span></div>
+        <p class="aviso"><b>Nota para la comunidad vegana:</b> [EDITAR: aclarar cómo maneja el cliente la elaboración — espacios, utensilios y horarios separados de la línea tradicional, según corresponda].</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LA ALACENA ================= -->
+<section class="alacena" id="alacena">
+  <div class="wrap">
+    <div class="enc">
+      <span class="k k-bordo">También en el mostrador</span>
+      <h2>El <em>almacén</em> de la granja</h2>
+      <p>Lo que acompaña la picada y la mesa: miel de colmenas de la zona, aderezos caseros y los condimentos que usamos nosotros.</p>
+    </div>
+    <!-- EDITAR: productos, fotos y precios reales del almacén -->
+    <div class="ala-grid">
+      <div class="ala">
+        <figure><img src="https://images.pexels.com/photos/4480158/pexels-photo-4480158.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Frasco de miel pura con cucharón de madera"></figure>
+        <div class="ala-body"><h3>Miel pura</h3><p>De colmenas de la zona, cosecha de estación. Líquida o cremosa, en frasco de medio kilo o kilo.</p><span class="precio"><i>$[EDITAR]</i> /frasco</span></div>
+      </div>
+      <div class="ala">
+        <figure><img src="https://images.pexels.com/photos/6611594/pexels-photo-6611594.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Frascos de aderezos y conservas caseras"></figure>
+        <div class="ala-body"><h3>Aderezos caseros</h3><p>Chimichurri de la casa, salsa criolla y mayonesa de campo. Hechos acá, en tandas chicas.</p><span class="precio"><i>$[EDITAR]</i> /frasco</span></div>
+      </div>
+      <div class="ala">
+        <figure><img src="https://images.pexels.com/photos/678414/pexels-photo-678414.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Especias y condimentos variados"></figure>
+        <div class="ala-body"><h3>Condimentos y especias</h3><p>Pimentón, ají molido, orégano de la sierra y provenzal. Frescos, fraccionados en la granja.</p><span class="precio"><i>$[EDITAR]</i> /100 g</span></div>
+      </div>
+      <div class="ala">
+        <figure><img src="https://images.pexels.com/photos/2255924/pexels-photo-2255924.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Canasta con productos frescos de la granja"></figure>
+        <div class="ala-body"><h3>Canasta de la semana</h3><p>Armá tu combo: chorizos caseros + aderezo + miel, o pedila mixta con la línea verde.</p><span class="precio"><i>$[EDITAR]</i> /canasta</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BANDA QUOTE ================= -->
+<div class="banda">
+  <div>
+    <blockquote>"Hecho como antes, hecho acá. Esa es toda la receta."</blockquote>
+    <span class="firma">— Granja Alborada · [EDITAR: año de fundación]</span>
+  </div>
+</div>
+
+<!-- ================= PROCESO ================= -->
+<section id="proceso">
+  <div class="wrap">
+    <div class="enc">
+      <span class="k k-bordo">Cómo trabajamos</span>
+      <h2>Del corral y de la huerta, <em>sin atajos</em></h2>
+    </div>
+    <div class="proceso-grid">
+      <div class="pro"><span class="n">I</span><h3>Crianza y huerta propia</h3><p>Los animales se crían acá y las verduras salen de la huerta o de quintas vecinas. Sabemos qué entra porque lo vimos crecer.</p></div>
+      <div class="pro"><span class="n">II</span><h3>Elaboración artesanal</h3><p>Chacinados atados a mano y línea verde cocinada en tandas chicas. Recetas de familia, sin apuro.</p></div>
+      <div class="pro"><span class="n">III</span><h3>Maduración y frescura</h3><p>Cada embutido madura lo que tiene que madurar. Lo fresco se vende en el día; lo que no, no sale.</p></div>
+      <div class="pro"><span class="n">IV</span><h3>Mostrador y envíos</h3><p>Venta directa en la granja o envío con cadena de frío en la zona. Del mostrador a tu mesa.</p></div>
+    </div>
+  </div>
+</section>
+<!-- ================= VOCES ================= -->
+<section class="voces">
+  <div class="wrap">
+    <div class="enc">
+      <span class="k k-bordo">Reseñas</span>
+      <h2>Qué dicen <em>los clientes</em></h2>
+      <p>De los que compran en el mostrador, de la línea verde y por bulto. Palabra de cliente.</p>
+    </div>
+    <!-- EDITAR ⚠️ RESEÑAS FICTICIAS DE DEMO: reemplazar por reseñas reales antes de publicar. NUNCA dejar en producción. -->
+    <div class="voces-grid">
+      <div class="voz"><p>"El salame es de otro planeta. Se nota la maduración de verdad, no el apuro del supermercado."</p><b>Raúl D.</b><span>Cliente de mostrador · Demo</span></div>
+      <div class="voz"><p>"Soy vegana y acá encuentro una línea pensada en serio, no un menú de consolación. Las milanesas son gloria."</p><b>Julieta P.</b><span>Cliente de la línea verde · Demo</span></div>
+      <div class="voz"><p>"Compro por bulto para mi almacén hace dos años. Calidad pareja todas las semanas y precio justo."</p><b>Sergio M.</b><span>Cliente mayorista · Demo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq">
+  <div class="wrap" style="max-width:860px">
+    <div class="enc">
+      <span class="k k-bordo">Preguntas frecuentes</span>
+      <h2>Antes de venir, <em>leé esto</em></h2>
+    </div>
+    <!-- EDITAR: respuestas con datos reales -->
+    <div class="faq-item"><button type="button">¿Venden al público o solo por mayor?</button><div class="faq-body"><p>Las dos cosas. El mostrador de la granja atiende al público de jueves a domingo, y para almacenes, dietéticas y carnicerías armamos precios por bulto. Consultá por WhatsApp.</p></div></div>
+    <div class="faq-item"><button type="button">¿Hacen envíos?</button><div class="faq-body"><p>Sí, en la zona con vehículo refrigerado para no cortar la cadena de frío. Coordinamos día y horario por WhatsApp según tu ubicación.</p></div></div>
+    <div class="faq-item"><button type="button">¿La línea vegana se elabora separada de la tradicional?</button><div class="faq-body"><p>[EDITAR: respuesta honesta del cliente — espacios, utensilios y horarios de elaboración. Este punto es clave para la comunidad vegana: no inventar.]</p></div></div>
+    <div class="faq-item"><button type="button">¿Puedo encargar cortes o productos especiales?</button><div class="faq-body"><p>Sí, por encargo: cortes específicos, lechón para eventos, picadas armadas y tandas especiales de la línea verde. Pedilo con unos días de anticipación.</p></div></div>
+    <div class="faq-item"><button type="button">¿Qué medios de pago aceptan?</button><div class="faq-body"><p>Efectivo, transferencia y billeteras virtuales en el mostrador. Para mayoristas, cuenta corriente a convenir.</p></div></div>
+  </div>
+</section>
+
+<!-- ================= VISITANOS ================= -->
+<section id="visitanos" style="padding-top:0">
+  <div class="wrap">
+    <div class="enc">
+      <span class="k k-verde">Dónde estamos</span>
+      <h2>Vení a la <em>granja</em></h2>
+    </div>
+    <div class="visita-grid">
+      <div>
+        <!-- EDITAR: datos reales -->
+        <div class="v-fila"><b>Dirección</b><div>Camino rural [EDITAR] km 4, [EDITAR: Localidad], Buenos Aires</div></div>
+        <div class="v-fila"><b>Mostrador</b><div>Jueves a domingo de 9 a 19 hs</div></div>
+        <div class="v-fila"><b>WhatsApp</b><div>11 [EDITAR] — pedidos y lista de precios semanal</div></div>
+        <div class="v-fila"><b>Mayoristas</b><div>[EDITAR]@[EDITAR].com.ar</div></div>
+      </div>
+      <!-- EDITAR: reemplazar por iframe de Google Maps -->
+      <div class="mapa">📍 Acá va el mapa de Google Maps<br>con la ubicación real de la granja</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA FINAL ================= -->
+<section class="cta-final" style="padding-top:0">
+  <div class="wrap">
+    <h2>Esta semana hay <em>tanda fresca</em>.</h2>
+    <p>Pedí la lista de precios vigente y encargá lo tuyo. Lo retirás en la granja o te lo llevamos con frío.</p>
+    <a class="btn btn-bordo" href="https://wa.me/5491100000000?text=Hola,%20quiero%20la%20lista%20de%20precios%20de%20esta%20semana" target="_blank" rel="noopener">Pedir la lista por WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <!-- EDITAR: nombre del negocio -->
+    <span>© 2026 Granja Alborada — Cerdo, embutidos y línea vegana. Todos los derechos reservados.</span>
+    <span>Sitio creado por <a href="https://instagram.com/flowbitai" target="_blank" rel="noopener">FlowbitAI</a></span>
+  </div>
+</footer>
+
+<!-- ================= CHAT ================= -->
+<button id="chat-boton" aria-label="Abrir chat">💬</button>
+<div id="chat-panel" role="dialog" aria-label="Chat de asistencia">
+  <div class="chat-top"><b>Mostrador virtual · Alborada</b><span>● En línea · responde al instante</span></div>
+  <div id="chat-mensajes"></div>
+  <form class="chat-form" id="chat-form">
+    <input id="chat-input" type="text" placeholder="Ej: ¿qué corte me conviene para el asador?" maxlength="500" autocomplete="off">
+    <button type="submit" aria-label="Enviar">➤</button>
+  </form>
+</div>
+
+<script>
+/* ===== Header sólido al scrollear ===== */
+const header=document.getElementById('header');
+addEventListener('scroll',()=>header.classList.toggle('solida',scrollY>40),{passive:true});
+
+/* ===== Menú mobile ===== */
+const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+burger.addEventListener('click',()=>menu.classList.toggle('abierto'));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('abierto')));
+
+/* ===== FAQ acordeón ===== */
+document.querySelectorAll('.faq-item button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const item=b.parentElement,abierta=item.classList.contains('abierta');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('abierta'));
+    if(!abierta)item.classList.add('abierta');
+  });
+});
+
+/* ===== Chatbot ===== */
+const chatBoton=document.getElementById('chat-boton'),chatPanel=document.getElementById('chat-panel'),
+      chatForm=document.getElementById('chat-form'),chatInput=document.getElementById('chat-input'),
+      chatMensajes=document.getElementById('chat-mensajes');
+let historial=[]; // capado a 10 mensajes (5 idas y vueltas)
+let chatAbierto=false;
+
+chatBoton.addEventListener('click',()=>{
+  chatAbierto=!chatAbierto;
+  chatPanel.classList.toggle('abierto',chatAbierto);
+  chatBoton.textContent=chatAbierto?'✕':'💬';
+  if(chatAbierto&&chatMensajes.children.length===0){
+    agregarMensaje('bot','Hola, soy el mostrador virtual de la granja. Decime qué estás buscando: cortes de cerdo, embutidos, la línea vegana o algo de la alacena, y te oriento. También te paso horarios y cómo encargar.');
+  }
+  if(chatAbierto)chatInput.focus();
+});
+
+/* Render seguro: SIEMPRE textContent, nunca innerHTML */
+function agregarMensaje(tipo,texto){
+  const div=document.createElement('div');
+  div.className='msg '+tipo;
+  div.textContent=texto;
+  chatMensajes.appendChild(div);
+  chatMensajes.scrollTop=chatMensajes.scrollHeight;
+  return div;
+}
+
+chatForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const texto=chatInput.value.trim();
+  if(!texto)return;
+  chatInput.value='';
+  agregarMensaje('usuario',texto);
+  historial.push({role:'user',content:texto});
+  if(historial.length>10)historial=historial.slice(-10);
+  const espera=agregarMensaje('escribiendo','Escribiendo…');
+  try{
+    const res=await fetch('/.netlify/functions/chat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({historial})
+    });
+    const data=await res.json();
+    espera.remove();
+    if(res.ok&&data.respuesta){
+      agregarMensaje('bot',data.respuesta);
+      historial.push({role:'assistant',content:data.respuesta});
+      if(historial.length>10)historial=historial.slice(-10);
+    }else{
+      agregarMensaje('bot',data.error||'Uy, tuve un problema. Probá de nuevo o escribinos por WhatsApp.');
+    }
+  }catch(err){
+    espera.remove();
+    agregarMensaje('bot','No pude conectarme. Revisá tu conexión o escribinos directo por WhatsApp.');
+  }
+});
+</script>
+</body>
+</html>
